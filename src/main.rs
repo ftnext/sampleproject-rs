@@ -1,3 +1,3 @@
 fn main() {
-    println!("Hello, world!");
+    println!("Call your main application code here");
 }
