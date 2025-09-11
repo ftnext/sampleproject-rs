@@ -19,9 +19,7 @@ jobs:
       - uses: actions/checkout@v5
       - name: Build package
         run: |
-          pipx run maturin build
-          pipx run twine check target/wheels/*
+          pipx run maturin build --release --out dist --sdist
+          pipx run twine check dist/*
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          packages-dir: target/wheels/
