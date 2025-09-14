@@ -46,5 +46,8 @@ jobs:
         with:
           pattern: pypi-files-*
           path: dist
+          merge-multiple: true
+      - name: Debug information
+        run: ls -lah dist/
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1
