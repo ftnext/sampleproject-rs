@@ -1,3 +1,4 @@
+# Based on `maturin generate-ci github`
 name: Publish Python Package
 
 on:
@@ -55,9 +56,31 @@ jobs:
         with:
           name: pypi-files-linux-${{ matrix.platform.target }}
           path: dist
+  macos:
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      matrix:
+        platform:
+          - runner: macos-13
+            target: x86_64
+          - runner: macos-14
+            target: aarch64
+    steps:
+      - uses: actions/checkout@v5
+      - uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist
+      - name: Check
+        run: |
+          pipx run twine check dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pypi-files-macos-${{ matrix.platform.target }}
+          path: dist
 
   publish:
-    needs: [sdist, linux]
+    needs: [sdist, linux, macos]
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
