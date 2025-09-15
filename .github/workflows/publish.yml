@@ -56,6 +56,33 @@ jobs:
         with:
           name: pypi-files-linux-${{ matrix.platform.target }}
           path: dist
+  musllinux:
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      matrix:
+        platform:
+          - runner: ubuntu-22.04
+            target: x86_64
+          - runner: ubuntu-22.04
+            target: x86
+          - runner: ubuntu-22.04
+            target: aarch64
+          - runner: ubuntu-22.04
+            target: armv7
+    steps:
+      - uses: actions/checkout@v5
+      - uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist
+          manylinux: musllinux_1_2
+      - name: Check
+        run: |
+          pipx run twine check dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pypi-files-musllinux-${{ matrix.platform.target }}
+          path: dist
   macos:
     runs-on: ${{ matrix.platform.runner }}
     strategy:
@@ -102,7 +129,7 @@ jobs:
           path: dist
 
   publish:
-    needs: [sdist, linux, macos, windows]
+    needs: [sdist, linux, musllinux, macos, windows]
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
