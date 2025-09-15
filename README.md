@@ -2,8 +2,6 @@
 
 Inspired [sampleproject](https://github.com/pypa/sampleproject/).
 
-*Currently distributed to GitHub Codespace (Ubuntu) only.*
-
 ----
 
 This is the README file for the project.
