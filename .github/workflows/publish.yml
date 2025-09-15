@@ -9,13 +9,16 @@ permissions:
   contents: read
 
 jobs:
-  build-sdist:
+  sdist:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Build package
+      - uses: PyO3/maturin-action@v1
+        with:
+          command: sdist
+          args: --out dist
+      - name: Check package
         run: |
-          pipx run maturin sdist --out dist
           pipx run twine check dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -35,7 +38,7 @@ jobs:
           path: dist
 
   publish:
-    needs: [build-sdist, build-linux]
+    needs: [sdist, build-linux]
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
