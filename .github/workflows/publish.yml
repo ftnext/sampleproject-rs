@@ -24,21 +24,40 @@ jobs:
         with:
           name: pypi-files-sdist
           path: dist
-  build-linux:
-    runs-on: ubuntu-latest
+  linux:
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      matrix:
+        platform:
+          - runner: ubuntu-22.04
+            target: x86_64
+          - runner: ubuntu-22.04
+            target: x86
+          - runner: ubuntu-22.04
+            target: aarch64
+          - runner: ubuntu-22.04
+            target: armv7
+          - runner: ubuntu-22.04
+            target: s390x
+          - runner: ubuntu-22.04
+            target: ppc64le
     steps:
       - uses: actions/checkout@v5
-      - name: Build package
+      - uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target}}
+          args: --release --out dist
+          manylinux: auto
+      - name: Check
         run: |
-          pipx run maturin build --release --out dist
           pipx run twine check dist/*
       - uses: actions/upload-artifact@v4
         with:
-          name: pypi-files-linux
+          name: pypi-files-linux-${{ matrix.platform.target }}
           path: dist
 
   publish:
-    needs: [sdist, build-linux]
+    needs: [sdist, linux]
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
