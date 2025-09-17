@@ -116,7 +116,7 @@ dependencies = []
 # https://packaging.python.org/en/latest/specifications/dependency-specifiers/#extras
 [project.optional-dependencies]
 dev = []
-test = []
+test = ["pytest"]
 
 # List URLs that are relevant to your project
 #
