@@ -142,5 +142,5 @@ test = []
 # This is configuration specific to the `maturin` build backend.
 # If you are using a different build backend, you will need to change this.
 [tool.maturin]
-bindings = "bin"
-strip = true
+bindings = "pyo3"
+features = ["pyo3/extension-module"]
