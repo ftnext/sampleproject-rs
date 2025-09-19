@@ -12,11 +12,16 @@ fn add_one(number: i32) -> i32 {
 
 #[pymodule]
 mod sample {
+    use super::*;
+
     #[pymodule_export]
     use super::main;
 
-    #[pymodule_export]
-    use super::add_one;
+    #[pymodule]
+    mod simple {
+        #[pymodule_export]
+        use super::add_one;
+    }
 }
 
 #[cfg(test)]

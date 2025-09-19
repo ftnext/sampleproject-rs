@@ -2,9 +2,9 @@ import subprocess
 
 
 def test_add_one():
-    from sample import add_one
+    from sample import simple
 
-    assert add_one(20) == 21
+    assert simple.add_one(20) == 21
 
 
 def test_sample_command():
