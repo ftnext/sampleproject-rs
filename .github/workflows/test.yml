@@ -26,12 +26,25 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
-      - name: Install
+      - name: Install (Linux / macOS)
+        if: ! startsWith(matrix.os, 'windows')
         run: |
           python -m venv .venv --upgrade-deps
           source .venv/bin/activate
           pipx run maturin develop -E test
-      - name: Run tests
+      - name: Install (Windows)
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          python -m venv .venv --upgrade-deps
+          .venv\Scripts\activate
+          pipx run maturin develop -E test
+      - name: Run tests (Linux / macOS)
+        if: ! startsWith(matrix.os, 'windows')
         run: |
           source .venv/bin/activate
+          pytest
+      - name: Run tests (Windows)
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          .venv\Scripts\activate
           pytest
