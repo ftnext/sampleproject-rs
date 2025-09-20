@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install (Linux / macOS)
-        if: ! startsWith(matrix.os, 'windows')
+        if: ${{ ! startsWith(matrix.os, 'windows') }}
         run: |
           python -m venv .venv --upgrade-deps
           source .venv/bin/activate
@@ -39,7 +39,7 @@ jobs:
           .venv\Scripts\activate
           pipx run maturin develop -E test
       - name: Run tests (Linux / macOS)
-        if: ! startsWith(matrix.os, 'windows')
+        if: ${{ ! startsWith(matrix.os, 'windows') }}
         run: |
           source .venv/bin/activate
           pytest
