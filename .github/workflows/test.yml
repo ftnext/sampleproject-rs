@@ -4,7 +4,11 @@ on: [push]
 
 jobs:
   rust:
-    runs-on: ubuntu-latest
+    name: cargo test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v5
       - uses: actions-rust-lang/setup-rust-toolchain@v1
