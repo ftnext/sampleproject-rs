@@ -23,4 +23,7 @@ jobs:
           python -m venv .venv --upgrade-deps
           source .venv/bin/activate
           pipx run maturin develop -E test
-      - run: .venv/bin/pytest
+      - name: Run tests
+        run: |
+          source .venv/bin/activate
+          pytest
