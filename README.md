@@ -1,6 +1,17 @@
 # A sample Python project from Rust binary
 
-Inspired [sampleproject](https://github.com/pypa/sampleproject/).
+Inspired by [sampleproject](https://github.com/pypa/sampleproject/).
+
+This provides the following:
+
+* `sample` command
+* `sample.simple.add_one()`
+
+```python
+>>> from sample import simple
+>>> simple.add_one(42)
+43
+```
 
 ----
 
