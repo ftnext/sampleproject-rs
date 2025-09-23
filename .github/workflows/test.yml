@@ -49,34 +49,32 @@ jobs:
           .venv\Scripts\activate
           pytest
 
-  build:
+  linux-build:
     needs: [rust, python]
-    name: Test build on ${{ matrix.platform.runner }}
-    runs-on: ${{ matrix.platform.runner }}
-    strategy:
-      matrix:
-        platform:
-          - runner: ubuntu-latest
-            target: x86_64
-          - runner: macos-latest
-            target: aarch64
+    name: Test build (Ubuntu)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - if: ${{ ! startsWith(matrix.platform.runner, 'ubuntu') }}
-        uses: PyO3/maturin-action@v1
+      - uses: PyO3/maturin-action@v1
         with:
-          target: ${{ matrix.platform.target }}
-          args: --release --out dist
-      - if: startsWith(matrix.platform.runner, 'ubuntu')
-        uses: PyO3/maturin-action@v1
-        with:
-          target: ${{ matrix.platform.target }}
-          args: --release --out dist
+          target: x86_64
+          args: --release --out dist -i 3.10 -i 3.11 -i 3.12 -i 3.13
           manylinux: auto
+
+  macos-build:
+    needs: [rust, python]
+    name: Test build (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: PyO3/maturin-action@v1
+        with:
+          target: aarch64
+          args: --release --out dist
 
   windows-build:
     needs: [rust, python]
-    name: Build (Windows) target=${{ matrix.arch }}
+    name: Test build (Windows) target=${{ matrix.arch }}
     runs-on: windows-latest
     strategy:
       matrix:
