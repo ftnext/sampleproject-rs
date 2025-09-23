@@ -61,7 +61,7 @@ jobs:
           - runner: macos-latest
             target: aarch64
           - runner: windows-latest
-            target: x86
+            target: x86_64
     steps:
       - uses: actions/checkout@v5
       - if: ${{ ! startsWith(matrix.platform.runner, 'ubuntu') }}
