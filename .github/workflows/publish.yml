@@ -47,7 +47,7 @@ jobs:
       - uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target}}
-          args: --release --out dist
+          args: --release --out dist -i 3.10 -i 3.11 -i 3.12 -i 3.13
           manylinux: auto
       - name: Check
         run: |
@@ -74,7 +74,7 @@ jobs:
       - uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist
+          args: --release --out dist -i 3.10 -i 3.11 -i 3.12 -i 3.13
           manylinux: musllinux_1_2
       - name: Check
         run: |
