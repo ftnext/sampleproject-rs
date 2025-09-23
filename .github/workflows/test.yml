@@ -31,13 +31,13 @@ jobs:
         run: |
           python -m venv .venv --upgrade-deps
           source .venv/bin/activate
-          pipx run maturin develop -E test
+          pipx run --python 3.13 maturin develop -E test
       - name: Install (Windows)
         if: startsWith(matrix.os, 'windows')
         run: |
           python -m venv .venv --upgrade-deps
           .venv\Scripts\activate
-          pipx run maturin develop -E test
+          pipx run --python 3.13 maturin develop -E test
       - name: Run tests (Linux / macOS)
         if: ${{ ! startsWith(matrix.os, 'windows') }}
         run: |
