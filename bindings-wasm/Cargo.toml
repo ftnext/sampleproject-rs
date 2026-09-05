@@ -1,0 +1,11 @@
+[package]
+name = "bindings-wasm"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+sample-core = { path = "../sample-core" }
+wasm-bindgen = "0.2"
