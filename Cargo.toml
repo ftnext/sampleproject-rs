@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "bindings-py",
+    "bindings-wasm",
     "sample-core",
 ]
 resolver = "2"
