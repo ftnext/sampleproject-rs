@@ -1,0 +1,12 @@
+[package]
+name = "sample-py"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+name = "sample"
+crate-type = ["cdylib"]
+
+[dependencies]
+sample-core = { path = "../sample-core" }
+pyo3 = { version = "0.26.0", features = ["extension-module", "abi3-py310"] }

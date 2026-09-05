@@ -4,7 +4,10 @@ version = "0.0.1"
 edition = "2024"
 
 [workspace]
-members = ["sample-core"]
+members = [
+    "bindings-py",
+    "sample-core",
+]
 resolver = "2"
 
 [workspace.package]
