@@ -83,9 +83,6 @@ classifiers = [
   "Intended Audience :: Developers",
   "Topic :: Software Development :: Build Tools",
 
-  # Pick your license as you wish
-  "License :: OSI Approved :: MIT License",
-
   # Specify the Python versions you support here. In particular, ensure
   # that you indicate you support Python 3. These classifiers are *not*
   # checked by "pip install". See instead "requires-python" key in this file.
