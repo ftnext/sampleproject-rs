@@ -10,7 +10,7 @@ checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 
 [[package]]
 name = "bindings-wasm"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "sample-core",
  "wasm-bindgen",
@@ -154,11 +154,11 @@ checksum = "cf54715a573b99ac80df0bc206da022bcd442c974952c7b9720069370852e21f"
 
 [[package]]
 name = "sample-core"
-version = "0.3.0"
+version = "0.3.1"
 
 [[package]]
 name = "sample-py"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "pyo3",
  "sample-core",
